@@ -1,0 +1,15 @@
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    float d = 54.5f;
+    float* pd;
+
+    cout << "Isi d mula-mula = " << d << endl;
+
+    pd = &d;    
+    *pd += 10;
+
+    cout << "Isi d sekarang = " << d << endl;
+}
