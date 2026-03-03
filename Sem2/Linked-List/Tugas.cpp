@@ -15,13 +15,21 @@ void spawnAwal()
     Node* goblin = new Node{"Goblin ", 100, nullptr};
     Node* orc = new Node{"Orc ", 90, nullptr};
     Node* dragon = new Node{"Dragon(boss) ", 100, nullptr};
+    Node* newNode = new Node;
 
-    head = goblin;
+    string nama; int hp;
+    cout << "Masukkan nama : "; cin >> nama ; 
+    cout << "Masukkan HP :"; cin >> hp;
+    newNode->name = nama + " ";
+    newNode->hp = hp;
+    newNode->next = goblin;
+    head = newNode;
+
     goblin->next = orc;
     orc->next = dragon;
     dragon->next = nullptr;
-    cout << "Nama enemy : " << goblin->name << orc->name << dragon -> name << endl;
-    cout << "Hp enemy : " << goblin->hp << " " << orc->hp << " " << dragon -> hp << endl << "Spawn sukses " << endl;
+    cout << "Nama enemy : " << newNode->name << goblin->name << orc->name << dragon -> name << endl;
+    cout << "Hp enemy : " << newNode->hp << " " << goblin->hp << " " << orc->hp << " " << dragon -> hp << endl << "Spawn sukses " << endl;
 }
 
 // ================= INSERT SEBELUM DRAGON =================
@@ -73,17 +81,25 @@ void deleteDragon()
 }
 
 // ================= DISPLAY =================
-void display()
+void display(bool isWhat)
 {
     Node* temp = head;
-
+    int count;
     while (temp != nullptr)
     {
-        cout << temp->name << " -> ";
-        temp = temp->next;
+        if(isWhat)
+        {
+            cout << temp->name << " -> ";
+            temp = temp->next;
+        }
+        else
+        {
+            temp = temp->next;
+            count ++;
+        }
     }
-
-    cout << "NULL\n";
+    if(!isWhat)
+        cout <<count << endl;
 }
 
 // ================= MAIN =================
@@ -100,6 +116,7 @@ int main()
                << "2. Insert enemy before dragon\n"
                << "3. Kill enemy dragon\n"
                << "4. Show enemy list\n"
+               << "5. Count enemy list\n"
                << "0. Exit\n";
 
          cout << "Pilih : ";
@@ -120,7 +137,11 @@ int main()
                   deleteDragon();
                   break;
             case 4:
-                  display();
+                  display(true);
+                  cout << "NULL\n";
+                  break;
+            case 5:
+                  display(false);
                   break;
             default:
                   cout << "Tidak ada opsi ini" << endl;
